@@ -1,0 +1,2 @@
+include ':app', ':arouter_annotation', ':arouter_compiler', ':arouter_api', ':order', ':personal', ':common'
+rootProject.name='AptDemo'
