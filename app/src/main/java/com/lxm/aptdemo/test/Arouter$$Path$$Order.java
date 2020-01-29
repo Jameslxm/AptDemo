@@ -1,7 +1,7 @@
 package com.lxm.aptdemo.test;
 
 import com.lxm.module.annotation.module.RouterBean;
-import com.lxm.module.api.ARouterLoadPath;
+import com.lxm.module.api.core.ARouterLoadPath;
 import com.lxm.order.OrderActivity;
 
 import java.util.HashMap;

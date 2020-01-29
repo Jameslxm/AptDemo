@@ -1,7 +1,7 @@
 package com.lxm.aptdemo.test;
 
-import com.lxm.module.api.ARouterLoadGroup;
-import com.lxm.module.api.ARouterLoadPath;
+import com.lxm.module.api.core.ARouterLoadGroup;
+import com.lxm.module.api.core.ARouterLoadPath;
 
 import java.util.HashMap;
 import java.util.Map;

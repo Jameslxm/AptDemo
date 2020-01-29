@@ -1,4 +1,4 @@
-package com.lxm.module.api;
+package com.lxm.module.api.core;
 
 import java.util.Map;
 

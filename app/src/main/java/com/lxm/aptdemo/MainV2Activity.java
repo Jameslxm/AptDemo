@@ -1,10 +1,10 @@
 package com.lxm.aptdemo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lxm.aptdemo.test.Arouter$$Group$$Order;
 import com.lxm.module.annotation.ARouter;
@@ -14,8 +14,8 @@ import com.lxm.module.api.core.ARouterLoadPath;
 
 import java.util.Map;
 
-@ARouter(path = "/app/MainActivity")
-public class MainActivity extends AppCompatActivity {
+@ARouter(path = "/app/MainV2Activity")
+public class MainV2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -47,6 +47,18 @@ public class RouterBean {
         return path;
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public Element getElement() {
+        return element;
+    }
+
     public final static class Builder{
         private Element element;
         private Class<?> clazz;
@@ -72,12 +84,20 @@ public class RouterBean {
             this.path = path;
             return this;
         }
-        public RouterBean builder(){
+        public RouterBean build(){
 
             if (path == null || path.length() == 0){
                 throw new IllegalArgumentException("path不能为空。如：/app/MainActivity");
             }
             return new RouterBean(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "RouterBean{" +
+                "group='" + group + '\'' +
+                ", path='" + path + '\'' +
+                '}';
     }
 }

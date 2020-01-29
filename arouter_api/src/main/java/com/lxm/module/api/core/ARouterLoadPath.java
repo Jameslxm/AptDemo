@@ -1,4 +1,4 @@
-package com.lxm.module.api;
+package com.lxm.module.api.core;
 
 import com.lxm.module.annotation.module.RouterBean;
 
