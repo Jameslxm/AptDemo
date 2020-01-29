@@ -83,6 +83,7 @@ public class ARouterProcessor extends AbstractProcessor {
             //获取所有被@ARouter注解的元素集合
             Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(ARouter.class);
             parseElements(elements);
+
             return true;
         }
         return false;
@@ -93,6 +94,7 @@ public class ARouterProcessor extends AbstractProcessor {
         TypeMirror activityMirror = activityElement.asType();
         //获取每个元素类的信息
         for (Element element : elements) {
+            if (element == null) continue;
             TypeMirror elementMirror = element.asType();
             messager.printMessage(Diagnostic.Kind.NOTE, "遍历的元素信息为：" + elementMirror.toString());
 
@@ -126,7 +128,7 @@ public class ARouterProcessor extends AbstractProcessor {
 
         //生成路由组Group文件
         try {
-            createGroupFile(groupLoadType,pathLoadType);
+            createGroupFile(groupLoadType, pathLoadType);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -134,9 +136,7 @@ public class ARouterProcessor extends AbstractProcessor {
     }
 
     private void createPathFile(TypeElement pathLoadType) throws IOException {
-
         //方法的返回值Map<String, RouterBean>
-
         TypeName methodReturns = ParameterizedTypeName.get(
                 ClassName.get(Map.class),
                 ClassName.get(String.class),
@@ -170,17 +170,18 @@ public class ARouterProcessor extends AbstractProcessor {
             methodBuilder.addStatement("return $N", Constants.PATH_PARAMETER_NAME);
             String finalClassName = Constants.PATH_FILE_NAME + entry.getKey();
             messager.printMessage(Diagnostic.Kind.NOTE, "APT生成路由Path文件为：" + packageNameForAPT + "." + finalClassName);
+            messager.printMessage(Diagnostic.Kind.NOTE, "===>");
             JavaFile.builder(packageNameForAPT,
                     TypeSpec.classBuilder(finalClassName)
                             .addSuperinterface(ClassName.get(pathLoadType))
                             .addModifiers(Modifier.PUBLIC)
                             .addMethod(methodBuilder.build())
-                            .build()
-            ).build()
+                            .build())
+                    .build()
                     .writeTo(filer);
+
             tempGroupMap.put(entry.getKey(), finalClassName);
         }
-
     }
 
     private void createGroupFile(TypeElement groupLoadType, TypeElement pathLoadType) throws IOException {
@@ -244,7 +245,6 @@ public class ARouterProcessor extends AbstractProcessor {
         if (checkRouterPath(bean)) {
             messager.printMessage(Diagnostic.Kind.NOTE, "RouterBean >>>" + bean.toString());
             List<RouterBean> routerBeans = tempPathMap.get(bean.getGroup());
-            messager.printMessage(Diagnostic.Kind.NOTE, "====>1");
             if (EmptyUtils.isEmpty(routerBeans)) {
                 routerBeans = new ArrayList<>();
                 routerBeans.add(bean);
@@ -259,7 +259,6 @@ public class ARouterProcessor extends AbstractProcessor {
                 }
 
             }
-            messager.printMessage(Diagnostic.Kind.NOTE, "====>2");
 
         } else {
             messager.printMessage(Diagnostic.Kind.ERROR, "@ARouter注解未按规范，如：/app/MainActivity");
