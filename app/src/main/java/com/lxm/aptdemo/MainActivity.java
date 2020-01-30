@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.lxm.aptdemo.test.Arouter$$Group$$Order;
 import com.lxm.module.annotation.ARouter;
+import com.lxm.module.annotation.Parameter;
 import com.lxm.module.annotation.module.RouterBean;
 import com.lxm.module.api.core.ARouterLoadGroup;
 import com.lxm.module.api.core.ARouterLoadPath;
@@ -16,7 +17,6 @@ import java.util.Map;
 
 @ARouter(path = "/app/MainActivity")
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             if(routerBean != null) {
                 Intent intent = new Intent(this, routerBean.getClazz());
                 intent.putExtra("name", "lxm");
+                intent.putExtra("age",29);
                 startActivity(intent);
             }
         } catch (Exception e) {
